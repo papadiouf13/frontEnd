@@ -27,7 +27,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/admin-lte/plugins/jquery/jquery.min.js",
+              "./node_modules/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "./node_modules/admin-lte/dist/js/adminlte.min.js",
+              "./node_modules/admin-lte/dist/js/demo.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -51,7 +56,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -94,5 +105,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "26a68116-2ef6-4257-ac1a-96cb3bc26897"
   }
 }

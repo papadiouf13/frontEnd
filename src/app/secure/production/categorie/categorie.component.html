@@ -1,0 +1,108 @@
+<div class="container bg-white d-flex justify-content-center align-items-center"
+    style="height:100vh;">
+    <div class="card w-50">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4 offset-8">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="onChangeMode(checkMode)" #checkMode>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">{{mode}}</label>
+                      </div>
+                </div>
+            </div>
+            <div class="row">
+                <form class="d-flex justify-content-around">
+                    <div class="col-8">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Inline Form</label>
+                            <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Help text</small>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-3" style="margin-top: 31px;">
+                            <label for="" class="form-label"></label>
+                            <input type="submit" name="" id="" class="form-control btn btn-primary" placeholder="" aria-describedby="helpId">
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row" *ngIf="!this.loader">
+                <h4 class="card-title">Liste des Categories</h4>
+                <div class="d-flex justify-content-end mb-2">
+                    <button [disabled]="dataRemove.length == 0" name="" id="" class="btn btn-danger " role="button">Supprimer</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-light table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 10%;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" [disabled]="!checkMode.checked"
+                                            type="checkbox" value="" id="" [checked]="dataList.data.length==dataRemove.length" #inputCheckAll (change)="onRemoveAll(inputCheckAll)">
+
+                                    </div>
+
+                                </th>
+                                <th scope="col">Libelle</th>
+                                <th scope="col">Unite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class *ngFor="let cat of dataList.data">
+                                <td scope="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" [disabled]="!checkMode.checked"
+                                            type="checkbox" value id (change)="onAddArrayRemove($event,cat)" [checked]="checkAll">
+                                    </div>
+                                </td>
+                                <td>{{cat.libelle}}</td>
+                                <td>{{cat.unite_default.libelle}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-sm float-end">
+                            <li class="page-item" [class.active]="link.active" *ngFor="let link of dataList.links">
+                                <a class="page-link" href="javascript:void(0)" (click)="onPaginate(link.url)">
+                                    <span aria-hidden="true" [innerHTML]="link.label" ></span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="this.loader">
+                <div class="loader"></div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+    .loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto; /* ajustez la marge selon vos besoins */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+</style>
